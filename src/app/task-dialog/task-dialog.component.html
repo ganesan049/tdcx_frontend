@@ -1,0 +1,14 @@
+<div class="card">
+  <div class="card-body">
+    <div class="card-title">
+      + New Task
+    </div>
+    <input type="text" [(ngModel)] = "name" #task/>
+    <div *ngIf="this.data?.action == 'update';else addTaskBtn">
+      <button class="btn btn-primary" (click)="updateTask()">Update Task</button>
+    </div>
+    <ng-template #addTaskBtn>
+      <button class="btn btn-primary" (click)="addTask()">+ New Task</button>
+    </ng-template>
+  </div>
+</div>

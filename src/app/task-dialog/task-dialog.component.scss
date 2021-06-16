@@ -1,0 +1,24 @@
+.card{
+  width: 296px;
+  // height: 249px;
+}
+
+input[type = text]{
+    margin-bottom: 1rem;
+    background: #EEF1F8 0% 0% no-repeat padding-box;
+    color:#7A7D7E;
+    border-radius:0.5em;
+}
+
+button{
+  display: block;
+  width: 100%;
+}
+
+.error{
+  color: red;
+}
+
+.no-error{
+  display: none;
+}

@@ -1,0 +1,118 @@
+<div class="body" *ngIf="latestTasks.length > 0; else noTask">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12 col-md-4 mt-3">
+        <div class="card top_card">
+          <div class="card-body">
+            <div class="card-title">Tasks Completed</div>
+            <div class="card-text">
+              <span class="completed_count">
+                {{ tasksCompleted }}
+              </span>
+              <span class="total_count"> /{{ totalTasks }} </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-4 mt-3">
+        <div class="card top_card">
+          <div class="card-body">
+            <div class="card-title">Latest Created Tasks</div>
+            <div class="card-text">
+              <ul>
+                <div *ngFor="let task of latestTasks.slice(0, 3)">
+                  <li [ngClass]="{ strike_through: task.completed}">
+                    {{ task.name }}
+                  </li>
+                </div>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-4 mt-3">
+        <div class="card top_card">
+          <div class="chart">
+            <canvas
+              baseChart
+              [data]="pieChartData"
+              [labels]="pieChartLabels"
+              [chartType]="pieChartType"
+              [colors]="pieChartColors"
+              [legend]="pieChartLegend"
+            >
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-sm-12 col-md-3">Tasks</div>
+      <div class="col-sm-12 col-md-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"> Search </span>
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search by task name"
+            aria-label="Username"
+            aria-describedby="basic-addon1"
+            (ngModelChange)="searchTask($event)"
+            [ngModel]="searchText"
+          />
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-3">
+        <button class="btn btn-primary block_button" (click)="addTask()">+ New Task</button>
+      </div>
+    </div>
+    <div class="row mt-3 task_body">
+      <div *ngFor="let task of searchTaskList;index as i">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title">
+              <div class="row">
+                <div class="col-2">
+                  <input type="checkbox" [checked]="task.completed" (change)="editTask(task._id, task.name, !task.completed)" />
+                </div>
+                <div class="col-6">
+                  <span
+                    [ngClass]="{
+                      'task_name_not_done': !task.completed,
+                      'task_name_done': task.completed
+                    }"
+                    >{{ task.name }}</span
+                  >
+                </div>
+                <div class="col-4">
+                  <button type="button task_button" (click)="addTask(task._id, task.name, task.completed,'update')">
+                    EDIT
+                  </button>
+                  <button type="button task_button" (click)="deleteTask(task._id, task.name)">
+                    DELETE
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #noTask>
+  <div class="container-fluid">
+    <div class="row parentRow">
+      <div class="card task top_card">
+        <div class="card-body">
+          <div class="card-title">You have no task.</div>
+          <button class="btn btn-primary block_button" (click)="addTask()">
+            + New Task
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,35 @@
+.row{
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background: #F4F4F6 0% 0% no-repeat padding-box;
+  opacity: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.card{
+  width: 296px;
+  // height: 249px;
+}
+
+input[type = text]{
+    margin-bottom: 1rem;
+    background: #EEF1F8 0% 0% no-repeat padding-box;
+    color:#7A7D7E;
+    border-radius:0.5em;
+}
+
+button{
+  display: block;
+  width: 100%;
+}
+
+.error{
+  color: red;
+}
+
+.no-error{
+  display: none;
+}
